@@ -1,0 +1,133 @@
+<html>
+
+<title>Gridicious - Single Player</title>
+
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'play/style.css' %}" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<head>
+</head>
+
+<!--
+<a href="/play/">Home</a>
+
+<p>You are now playing single player version.</p>
+-->
+
+<h4>player name: {{ player.player_name }}</h4>
+<form id="nameInputForm" action="{% url 'submit_name' %}" method="post">
+    
+    {% csrf_token %}
+    <input type="text" name="new_player_name">
+    <input type="submit" value="Change name">
+</form>
+
+<p>High Score: {{ high_score }} by {{ hs_name }}</p> 
+
+
+
+
+<p>Moves Remaining: {{ moves_remaining }} &emsp;&emsp; SCORE: {{ score }}</p>
+
+<form action="{% url 'random_move' %}" method="post">
+    {% csrf_token %}
+    <button id="randomButton" type="submit">Random (r)</button>
+</form>
+
+<form action="{% url 'center_return' %}" method="post">
+    {% csrf_token %}
+    <button id="centerReturn" type="submit">Center (c)</button>
+</form>
+
+<form action="{% url 'start_singleplayer' %}" method="post">
+    {% csrf_token %}
+    <button id="playAgain" type="submit">Restart (z)</button>
+</form>
+
+<table id='gridtable'>
+    <tr>
+        <td id="TD0_0"></td>
+        <td id="TD0_1"></td>
+        <td id="TD0_2"></td>
+        <td id="TD0_3"></td>
+        <td id="TD0_4"></td>
+    </tr>
+    <tr>
+        <td id="TD1_0"></td>
+        <td id="TD1_1"></td>
+        <td id="TD1_2"></td>
+        <td id="TD1_3"></td>
+        <td id="TD1_4"></td>
+    </tr>
+    <tr>
+        <td id="TD2_0"></td>
+        <td id="TD2_1"></td>
+        <td id="TD2_2"></td>
+        <td id="TD2_3"></td>
+        <td id="TD2_4"></td>
+    </tr>
+    <tr>
+        <td id="TD3_0"></td>
+        <td id="TD3_1"></td>
+        <td id="TD3_2"></td>
+        <td id="TD3_3"></td>
+        <td id="TD3_4"></td>
+    </tr>
+    <tr>
+        <td id="TD4_0"></td>
+        <td id="TD4_1"></td>
+        <td id="TD4_2"></td>
+        <td id="TD4_3"></td>
+        <td id="TD4_4"></td>
+    </tr>
+</table>
+
+<!-- <a id="rulesphoto" href="{% url 'rules' %}"><img src="https://memegenerator.net/img/instances/74527769.jpg"></a> -->
+<a href="{% url 'rules' %}">Click here to see the rules!</a>
+
+<p>Game id: {{ game.pk }}. Player id: {{ player.pk }}.Last move: {{ move }}.</p>
+
+<script>
+    /* Showing game token in 
+                correct grid space 
+    */
+    let square_id = ['#TD','{{ location_x }}','_', '{{ location_y }}'].join('');
+    $(square_id).prepend('<img src="https://www.vhv.rs/dpng/d/45-450894_purple-circle-transparent-background-hd-png-download.png" width=75px height=75px class="center">');
+
+    /* Enabling or disabling buttons
+                based on grid location 
+    */
+    if (square_id === '#TD2_2') {
+        $("#centerReturn").prop('disabled', true);
+    }
+    if (square_id.includes('0') || square_id.includes('4')) { // out of bounds
+        $("#randomButton").prop('disabled', true);
+        $("#centerReturn").prop('disabled', true);
+    }
+    
+    /* Enabling keys to replace
+                center return and random move
+    */
+    $(document).keypress(function(e){
+       if (e.which == 99) {
+            $("#centerReturn").click();
+       }
+    });
+    $(document).keypress(function(e){
+       if (e.which == 114) {
+            $("#randomButton").click();
+       }
+    });
+    $(document).keypress(function(e){
+       if (e.which == 122) {
+            $("#playAgain").click();
+       }
+    });
+
+
+</script>
+
+
+</html>

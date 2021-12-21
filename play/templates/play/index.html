@@ -1,0 +1,8 @@
+<html>
+
+<form action="{% url 'start_singleplayer' %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Singleplayer!">
+</form>
+
+</html>

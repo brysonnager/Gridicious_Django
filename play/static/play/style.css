@@ -1,0 +1,96 @@
+body {
+    background-color: #b19999;
+}
+
+
+p {
+    color: whitesmoke;
+}
+
+#gridtable {
+    table-layout: fixed;
+    border-collapse: collapse;
+    /* border: 10px solid red; */
+    /* background-color: skyblue; */
+}
+
+#gridtable tr {
+    overflow: hidden;
+}
+
+#gridtable td {
+    /*background-color: skyblue; */
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border: 1px double black;
+    background-size: cover;
+}
+
+#gridtable tr > td:hover {
+    background-color: brown;
+}
+
+
+
+/* 10px red border */
+#gridtable tr:nth-child(n+2):nth-last-child(n+2) > td:first-child {
+    border-right: 2px solid black;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    background-size: cover;
+    background-color: #b96974;
+}
+#gridtable tr:nth-child(n+2):nth-last-child(n+2) > td:last-child {
+    border-left: 2px solid black;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    background-size: cover;
+    background-color: #b96974;
+}
+#gridtable tr:first-child > td:nth-child(n+2):nth-last-child(n+2) {
+    border-bottom: 2px solid black;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    background-size: cover;
+    background-color: #b96974;
+}
+#gridtable tr:last-child > td:nth-child(n+2):nth-last-child(n+2) {
+    border-top: 2px solid black;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    background-size: cover;
+    background-color: #b96974;
+}
+
+/* Pseudo-Removing corners */
+#gridtable tr:first-child > td:first-child, #gridtable tr:first-child > td:last-child,
+#gridtable tr:last-child > td:first-child, #gridtable tr:last-child > td:last-child
+{
+    background: transparent;
+    border: none;
+    background-size: cover;
+    background-color: #b96974;
+}
+
+
+
+#rulesphoto > img {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 30%;
+    width: 30%;
+}
+
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
